@@ -19,5 +19,5 @@ from user import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('task/',include('django.contrib.auth.urls')),
+    path('',include('user.urls')),
 ]
