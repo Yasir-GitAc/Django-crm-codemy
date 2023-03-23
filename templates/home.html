@@ -4,26 +4,31 @@
 {% block content %}
 
   {% if user.is_authenticated %}
-    <h1>Hello world</h1>
-  {% else %}
-    <div class="col-md-6 offset-md-3">
-      <h1>Login</h1>
-      <br/>
-      
-      <form method="POST" action="{% url 'home' %}">
-        {% csrf_token %}
-      
-        <div class="mb-3">
-          <input type="text" class="form-control" name="username", placeholder="Username" required>
-          
-        </div><br/>
-        <div class="mb-3">
-          <input type="password" class="form-control" name="password", placeholder="Password" required>
+    {% if tasks %}
+      {% for task in tasks %}
+        <div class="container">
+          <div class="card" style="width:30rem;">
+            <div class="card-header header-dark bg-dark" style="color: white;">
+              {{task.title}}
+            </div>
+            <div class="card-body">
+              {% if task.completed %}
+                <h5 class="card-title">Task Completed</h5>
+              {% else %}
+                <h5 class="card-title">Task UnCompleted</h5>
+              {% endif %}
+              <p class="card-text">{{task.description}}</p>
+              <a href="{% url "update_task" task.id %}" class="btn btn-outline-success" style="width:5em;">update</a>
+              <a href="{% url "delete_task" task.id %}" class="btn btn-outline-success" style="width:5em;">delete</a>
+            </div>
+          </div></br>
         </div>
-        <br/>
-        <button type="submit" class="btn btn-secondary">Login</button>
-      
-      </form>
-    </div>
+      {% endfor %}
+    {% else %}
+      <h2>Added Task Will Be Shown Here</h2>
+    {% endif %}
+  {% else %}
+    <h1>please login to add new task</h1>
   {% endif %}  
+
 {% endblock %}

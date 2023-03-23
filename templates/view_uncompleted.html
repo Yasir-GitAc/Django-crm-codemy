@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+  {% if tasks_uncompleted%}
+    {% for task in tasks_uncompleted%}
+      <div class="container">
+        <div class="card" style="width:30rem;">
+          <div class="card-header header-dark bg-dark" style="color: white;">
+            {{task.title}}
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{task.description}}</p>
+            <span class="form-text text-muted" style="color:black; font-weight: 150;"><small>created:{{task.created_at|date}}</small></span></br>
+            <a href="{% url "update_task" task.id %}" class="btn btn-outline-success" style="width:5em;">update</a>
+            <a href="{% url "delete_task" task.id %}" class="btn btn-outline-success" style="width:5em;">delete</a>
+          </div>
+        </div></br>
+      </div>
+    {% endfor %}
+  {% else %}
+    <h2>Uncompleted Task Will Be Shown Here</h2>
+  {% endif %}
+{% endblock content %}
+
