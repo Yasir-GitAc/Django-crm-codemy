@@ -10,9 +10,9 @@ from . models import Task
 @login_required(login_url='login')
 def home(request):
   user = request.user
-  tasks = user.task_set.all()
-  tasks_completed = user.task_set.filter(completed=True)
-  return render(request,'home.html', {'user':user, 'tasks':tasks})
+  tasks = user.task_set.all().order_by('-created_at')
+  tasks_incompleted = user.task_set.filter(completed=False)
+  return render(request,'home.html', {'user':user, 'tasks':tasks, 'tasks_incompleted':tasks_incompleted})
 
 def view_uncompleted(request):
   user = request.user

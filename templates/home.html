@@ -8,14 +8,14 @@
       {% for task in tasks %}
         <div class="container">
           <div class="card" style="width:30rem;">
-            <div class="card-header header-dark bg-dark" style="color: white;">
+            <div class="card-header text-bg-dark mb-3" style="color: white;">
               {{task.title}}
             </div>
             <div class="card-body">
               {% if task.completed %}
                 <h5 class="card-title">Task Completed</h5>
               {% else %}
-                <h5 class="card-title">Task UnCompleted</h5>
+                <h5 class="card-title">Task InCompleted</h5>
               {% endif %}
               <p class="card-text">{{task.description}}</p>
               <a href="{% url "update_task" task.id %}" class="btn btn-outline-success" style="width:5em;">update</a>
